@@ -1,5 +1,5 @@
 const {
-  getListContacts,
+  getContactsList,
   getContactById,
   removeContact,
   addContact,
@@ -11,7 +11,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
   try {
     switch (action) {
       case "list":
-        const contactsList = await getListContacts();
+        const contactsList = await getContactsList();
         return console.log(contactsList);
       case "get":
         const contactById = await getContactById(id);

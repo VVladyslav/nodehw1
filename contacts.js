@@ -7,19 +7,19 @@ const contactsPath = path.resolve("db", "./contacts.json");
 const updateContactList = (contacts) =>
   fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
 
-const getListContacts = async () => {
+const getContactsList = async () => {
   const contactsList = await fs.readFile(contactsPath, "utf-8");
   return JSON.parse(contactsList);
 };
 
 const getContactById = async (id) => {
-  const contacts = await listContacts();
+  const contacts = await getContactsList();
   const contactById = contacts.find((item) => item.id === id);
   return contactById || null;
 };
 
 const removeContact = async (id) => {
-  const contacts = await listContacts();
+  const contacts = await getContactsList();
   const index = contacts.findIndex((item) => item.id === id);
   if (index === -1) {
     return null;
@@ -30,7 +30,7 @@ const removeContact = async (id) => {
 };
 
 const addContact = async (name, email, phone) => {
-  const contacts = await listContacts();
+  const contacts = await getContactsList();
   const newContact = {
     id: nanoid(),
     name,
@@ -43,7 +43,7 @@ const addContact = async (name, email, phone) => {
 };
 
 module.exports = {
-  getListContacts,
+  getContactsList,
   getContactById,
   removeContact,
   addContact,
